@@ -189,8 +189,7 @@ var FormBuilderCheckBoxField = A.Component.create({
                 labelNode = instance.get('labelNode'),
                 templateNode = instance.get('templateNode');
 
-            labelNode.setContent('<span class="' + CSS_FIELD_CHECKBOX_TEXT +
-                '">' + AEscape.html(val) + '</span>');
+            labelNode.setContent('<span class="' + CSS_FIELD_CHECKBOX_TEXT + '">' + AEscape.html(val) + '</span>');
 
             labelNode.prepend(templateNode);
         },

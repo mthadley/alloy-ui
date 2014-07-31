@@ -132,6 +132,10 @@ YUI.add('aui-form-validator-tests', function(Y) {
 
             Y.Assert.isTrue(textNode.get('nodeType') === 3, 'Next to the input should be a text node');
 
+            if (inputNode.get('type') === 'radio') {
+                textNode = inputNode.ancestor('div').siblings('.radio').pop();
+            }
+
             Y.Assert.isTrue(
                 textNode.next().hasClass('form-validator-stack'),
                 'Next to the input should be form validator');

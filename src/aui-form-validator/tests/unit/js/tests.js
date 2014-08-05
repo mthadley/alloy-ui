@@ -5,6 +5,7 @@ YUI.add('aui-form-validator-tests', function(Y) {
     //--------------------------------------------------------------------------
 
     var suite = new Y.Test.Suite('aui-form-validator'),
+        inlineFormValidator,
         formValidator;
 
     formValidator = new Y.FormValidator({
@@ -52,6 +53,16 @@ YUI.add('aui-form-validator-tests', function(Y) {
         showAllMessages: true
     });
 
+    inlineFormValidator = new Y.FormValidator({
+        boundingBox: '#myInlineForm',
+        rules: {
+            confirm: {
+                required: true
+            }
+        },
+        showAllMessages: true
+    });
+
     //--------------------------------------------------------------------------
     // Test Case for invalid fields
     //--------------------------------------------------------------------------
@@ -66,11 +77,12 @@ YUI.add('aui-form-validator-tests', function(Y) {
          */
         'test submit form': function() {
             var elementWithoutError,
-                form;
+                forms;
 
-            form = Y.one('#myForm');
-
-            form.simulate('submit');
+            forms = Y.all('form');
+            forms.each(function (form) {
+                form.simulate('submit');
+            });
 
             elementWithoutError = Y.one('.form-group:not(.has-error)');
 
@@ -132,8 +144,11 @@ YUI.add('aui-form-validator-tests', function(Y) {
 
             Y.Assert.isTrue(textNode.get('nodeType') === 3, 'Next to the input should be a text node');
 
-            if (inputNode.get('type') === 'radio') {
-                textNode = inputNode.ancestor('div').siblings('.radio').pop();
+            var formInline = inputNode.ancestor('.form-inline'),
+                type = inputNode.get('type');
+
+            if (type === 'radio' || type === 'checkbox' || formInline) {
+                textNode = inputNode.ancestor('.form-group').get('lastChild').previous();
             }
 
             Y.Assert.isTrue(

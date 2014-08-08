@@ -53,16 +53,6 @@ YUI.add('aui-form-validator-tests', function(Y) {
         showAllMessages: true
     });
 
-    inlineFormValidator = new Y.FormValidator({
-        boundingBox: '#myInlineForm',
-        rules: {
-            confirm: {
-                required: true
-            }
-        },
-        showAllMessages: true
-    });
-
     //--------------------------------------------------------------------------
     // Test Case for invalid fields
     //--------------------------------------------------------------------------
@@ -144,10 +134,9 @@ YUI.add('aui-form-validator-tests', function(Y) {
 
             Y.Assert.isTrue(textNode.get('nodeType') === 3, 'Next to the input should be a text node');
 
-            var formInline = inputNode.ancestor('.form-inline'),
-                type = inputNode.get('type');
+            var type = inputNode.get('type');
 
-            if (type === 'radio' || type === 'checkbox' || formInline) {
+            if (type === 'radio' || type === 'checkbox') {
                 textNode = inputNode.ancestor('.form-group').get('lastChild').previous();
             }
 

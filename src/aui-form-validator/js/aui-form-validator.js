@@ -1022,10 +1022,9 @@ var FormValidator = A.Component.create({
 
                     if (ancestor) {
                         if (ancestor.hasClass(label)) {
-                            var formInline = field.ancestor('.form-inline'),
-                                type = field.get('type');
+                            var type = field.get('type');
 
-                            if (type === 'radio' || type === 'checkbox' || formInline) {
+                            if (type === 'radio' || type === 'checkbox') {
                                 target = ancestor.ancestor('.' + CSS_HAS_ERROR).get('lastChild');
                             } else {
                                 target = nextSibling;

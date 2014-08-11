@@ -996,10 +996,8 @@ var FormValidator = A.Component.create({
          */
         _defErrorFieldFn: function(event) {
             var instance = this,
-                ancestor,
                 field,
                 label,
-                nextSibling,
                 stackContainer,
                 target,
                 validator;
@@ -1015,27 +1013,8 @@ var FormValidator = A.Component.create({
 
                 stackContainer = instance.getFieldStackErrorContainer(field);
 
-                nextSibling = field.get('nextSibling');
-
-                if (nextSibling && nextSibling.get('nodeType') === 3) {
-                    ancestor = field.ancestor();
-
-                    if (ancestor) {
-                        if (ancestor.hasClass(label)) {
-                            var type = field.get('type');
-
-                            if (type === 'radio' || type === 'checkbox') {
-                                target = ancestor.ancestor('.' + CSS_HAS_ERROR).get('lastChild');
-                            } else {
-                                target = nextSibling;
-                            }
-                        }
-                        else if (A.FormValidator.isCheckable(target)) {
-                            label = ancestor.previous('.' + label);
-
-                            target = label;
-                        }
-                    }
+                if (A.FormValidator.isCheckable(target)) {
+                    target = field.ancestor('.' + CSS_HAS_ERROR).get('lastChild');
                 }
 
                 // Use aria-describedby to provide extra details for filling input field

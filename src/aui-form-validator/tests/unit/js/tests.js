@@ -5,7 +5,6 @@ YUI.add('aui-form-validator-tests', function(Y) {
     //--------------------------------------------------------------------------
 
     var suite = new Y.Test.Suite('aui-form-validator'),
-        inlineFormValidator,
         formValidator;
 
     formValidator = new Y.FormValidator({
@@ -134,9 +133,7 @@ YUI.add('aui-form-validator-tests', function(Y) {
 
             Y.Assert.isTrue(textNode.get('nodeType') === 3, 'Next to the input should be a text node');
 
-            var type = inputNode.get('type');
-
-            if (type === 'radio' || type === 'checkbox') {
+            if (Y.FormValidator.isCheckable(inputNode)) {
                 textNode = inputNode.ancestor('.form-group').get('lastChild').previous();
             }
 

@@ -637,17 +637,11 @@ var FormValidator = A.Component.create({
 
 				stackContainer = instance.getFieldStackErrorContainer(field);
 
-				nextSibling = field.get('nextSibling');
-
-				if (nextSibling && nextSibling.get('nodeType') === 3) {
-					ancestor = field.ancestor();
-
-					if (ancestor && ancestor.hasClass(instance.get(LABEL_CSS_CLASS))) {
-						target = nextSibling;
-					}
+				if (A.FormValidator.isCheckable(target)) {
+					target.ancestor('.' + CSS_ERROR_CONTAINER).append(stackContainer);
+				} else {
+					target.placeAfter(stackContainer);
 				}
-
-				target.placeAfter(stackContainer);
 
 				instance.printStackError(
 					field,

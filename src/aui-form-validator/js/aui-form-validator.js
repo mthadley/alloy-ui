@@ -58,6 +58,7 @@ var Lang = A.Lang,
 	VALID_CLASS = 'validClass',
 	VALIDATE_ON_BLUR = 'validateOnBlur',
 	VALIDATE_ON_INPUT = 'validateOnInput',
+	WRAPPER_CONTENT = 'wrapper-content',
 
 	getCN = A.getClassName,
 
@@ -66,7 +67,7 @@ var Lang = A.Lang,
 	CSS_VALID = getCN(FORM_VALIDATOR, VALID),
 	CSS_VALID_CONTAINER = getCN(FORM_VALIDATOR, VALID, CONTAINER),
 
-	CSS_FIELD = getCN(FIELD),
+	CSS_FIELD = getCN(FIELD, WRAPPER_CONTENT),
 	CSS_MESSAGE = getCN(FORM_VALIDATOR, MESSAGE),
 	CSS_STACK_ERROR = getCN(FORM_VALIDATOR, STACK, ERROR),
 
